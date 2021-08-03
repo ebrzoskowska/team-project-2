@@ -6,6 +6,7 @@ import {
   import styled from 'styled-components';
   import { Landing } from './pages/home/landing'
   import { Home } from './pages/home'
+  import { Profile } from './pages/profile'
   
 
 const App = () => {
@@ -19,6 +20,9 @@ const App = () => {
       </Route>
       <Route path='/home'>
         <Home />
+      </Route>
+      <Route path='/profile'>
+        <Profile user={user} setUser={setUser}/>
       </Route>
     </AppContainer>
   )
