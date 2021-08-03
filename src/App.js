@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import { 
+  BrowserRouter as Router,
+  Route,
+  Redirect } from 'react-router-dom';
+  import styled from 'styled-components';
+  import { Landing } from './pages/home/landing'
+  import { Home } from './pages/home'
+  import { Profile } from './pages/profile'
+  
 
-function App() {
+const App = () => {
+  const [user, setUser] = useState();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <AppContainer>
+      {user ? <Redirect to='/home' /> : <Redirect to ='/' />}
+      <Route exact path='/'>
+        <Landing user={user} setUser={setUser} />
+      </Route>
+      <Route path='/home'>
+        <Home />
+      </Route>
+      <Route path='/profile'>
+        <Profile user={user} setUser={setUser}/>
+      </Route>
+    </AppContainer>
+  )
+};
+
+const AppContainer = styled(Router)`
+width: 100vw;
+height: 100vh;
+`
 
 export default App;
