@@ -2,6 +2,7 @@ import { PageContainer } from "../../styledComponents"
 import Navbar from '../../components/navbar';
 import { useState } from 'react';
 import { updateUserDetails } from "../../utils";
+import { deleteUser } from "../../utils";
 
 export const Profile = ({ user, setUser}) => {
     const [email, setEmail] = useState();
@@ -37,6 +38,11 @@ export const Profile = ({ user, setUser}) => {
             </label>
             <button type="submit" >Update</button>
             </form>
+
+            <h2>Delete Account</h2>
+            <button type="submit"onClick={() => {
+                deleteUser()
+            }}>Delete Account</button>
            </PageContainer>
     )
 };
