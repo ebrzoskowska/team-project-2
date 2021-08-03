@@ -53,22 +53,18 @@ export const updateUserDetails = async (e,email, username, pass, user, setUser )
     }
 };
 
-export const deleteUser = async ( username, user, setUser ) => {
-
+export const deleteUser = async (user) => {
+        console.log(user);
     try {
         let response;
-        if (username) {
+        if (user) {
             response = await fetch(`${process.env.REACT_APP_REST_API}users/${user}`, {
                 method: 'DELETE',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    username: username,
-                })
+                username: user,
             })
     }
-    const data = await response.json();
-    console.log(data);
-    setUser(data.user.username)
+    await response.json();
     } catch (error) {
         console.log(error);
     }
