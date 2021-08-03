@@ -23,7 +23,7 @@ export const fetchUsers = async (e, email, username, pass, setUser) => {
     }
 };
 
-export const updateUserDetails = async (e,email, username, pass, setUser ) => {
+export const updateUserDetails = async (e,email, username, pass, user, setUser ) => {
     e.preventDefault();
 
     try {
@@ -35,11 +35,10 @@ export const updateUserDetails = async (e,email, username, pass, setUser ) => {
                 body: JSON.stringify({
                     email: email,
                     username: username,
-                    password: pass
+                    password: pass,
+                    currentUser: user
                 })
         })
-    } else {
-        response = await fetch(`${process.env.REACT_APP_REST_API}users/${username}`)
     }
     const data = await response.json();
     setUser(data.user.username)
