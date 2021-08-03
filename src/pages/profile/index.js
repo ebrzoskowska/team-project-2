@@ -37,7 +37,6 @@ export const Profile = ({ user, setUser}) => {
             </label>
             <button type="submit" >Update</button>
             </form>
-           
-        </PageContainer>
+           </PageContainer>
     )
 };
