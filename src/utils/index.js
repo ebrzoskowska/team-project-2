@@ -13,13 +13,19 @@ export const fetchUsers = async (e, email, username, pass, setUser) => {
                 })
             })
         } else {
-            response = await fetch(`${process.env.REACT_APP_REST_API}users/${username}`)
+            response = await fetch(`${process.env.REACT_APP_REST_API}users/${username}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    password: pass
+                })
+            })
         }
         const data = await response.json();
+        console.log(data)
         setUser(data.user.username)
-    
     } catch (error) {
-        console.log(error);
+        console.log(error)
     }
 };
 
@@ -38,7 +44,7 @@ export const updateUserDetails = async (e,email, username, pass, user, setUser )
                     password: pass,
                     currentUser: user
                 })
-        })
+            })
     }
     const data = await response.json();
     setUser(data.user.username)
@@ -47,6 +53,24 @@ export const updateUserDetails = async (e,email, username, pass, user, setUser )
     }
 };
 
+
+export const deleteUser = async (user) => {
+        console.log(user);
+    try {
+        let response;
+        if (user) {
+            response = await fetch(`${process.env.REACT_APP_REST_API}users/${user}`, {
+                method: 'DELETE',
+                headers: {'Content-Type': 'application/json'},
+                username: user,
+            })
+    }
+    await response.json();
+    } catch (error) {
+        console.log(error);
+    }
+}
+   
 
 //Movie Update
 export const updateMovie = async (e, watched, rating) => {
