@@ -73,26 +73,50 @@ export const deleteUser = async (user) => {
    
 
 //Movie Update
-export const updateMovie = async (e, watched, rating) => {
+export const updateMovie = async (e, watched, rating, setMovie) => {
     e.preventDefault();
     try {
         let response;
         if (watched){ 
-            response = await fetch(`${process.env.REACT_APP_REST_API}movies`),{
+            response = await fetch(`${process.env.REACT_APP_REST_API}movies`,{
                 method: 'PUT',
                 headers: {'Content-Type' : 'application/json'},
                 body: JSON.stringify({
                     watched: watched,
                     ratings: rating
                 })
-
+            })
             }
-            
-
-        }
     const data = await response.json();
     setMovie(data.movies.watched)    
     } catch (error) {
         console.log(error);
-    }
-};
+    };
+}
+
+
+// Add movie
+export const addMovie = async (e, title, actor, category, rating, setMovie) => {
+    e.preventDefault();
+    try {
+        let response;
+        if (title){ 
+            response = await fetch(`${process.env.REACT_APP_REST_API}movies`,{
+                method: 'POST',
+                headers: {'Content-Type' : 'application/json'},
+                body: JSON.stringify({
+                    title: title,
+                    actor: actor,
+                    category: category,
+                    rating: rating,
+                    watched: false,
+                })
+            })
+        }
+    const data = await response.json();
+    setMovie(data.movies.title)    
+    } catch (error) {
+        console.log(error);
+    };
+}
+
